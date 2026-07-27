@@ -42,4 +42,4 @@ jobs:
 
       - name: Notify if build fails
         if: failure()
-        run: echo "Build failed! Please check the logs for details.."
+        run: echo "Build failed! Please check the logs for details."
