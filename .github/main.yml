@@ -1,9 +1,13 @@
-name: Build 
+name: Build
+
+permissions:
+  contents: read
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   Build:
@@ -15,6 +19,12 @@ jobs:
 
       - name: Maven Build
         run: mvn install
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vprofile-app
+          path: target/*.war
 
   Testing:
     runs-on: ubuntu-latest
@@ -29,3 +39,7 @@ jobs:
 
       - name: Checkstyle
         run: mvn checkstyle:checkstyle
+
+      - name: Notify if build fails
+        if: failure()
+        run: echo "Build failed! Please check the logs for details."
