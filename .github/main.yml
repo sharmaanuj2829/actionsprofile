@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v6
+
       - name: Maven Build
         run: mvn install
 
